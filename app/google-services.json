@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1080605819375",
+    "project_id": "collegeastra-d18eb",
+    "storage_bucket": "collegeastra-d18eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080605819375:android:27ab18e084235b5cf1361a",
+        "android_client_info": {
+          "package_name": "com.collegeastra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080605819375-1ug79qgisq1eremdp5etjapp2jp971hf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.collegeastra",
+            "certificate_hash": "2c4f6ad1019a2fbfaa43041c1a6d818c2de27751"
+          }
+        },
+        {
+          "client_id": "1080605819375-r0shplr9bcvhlsq8utnu8t3tnpm4sc60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5js7Z4Gre8tJzY5zxmfP9runwi-MWiE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080605819375-r0shplr9bcvhlsq8utnu8t3tnpm4sc60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
