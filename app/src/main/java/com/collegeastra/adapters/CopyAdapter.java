@@ -2,6 +2,7 @@ package com.collegeastra.adapters;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.collegeastra.R;
+import com.collegeastra.activities.IssueBookActivity;
 import com.collegeastra.models.Copy;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -37,13 +39,6 @@ public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.Copy
                     //TODO update database with the returned date
                     holder.btn_valiate.setText("ISSUE");
                     //TODO add a date picker for the return date
-                }
-            });
-        }else{
-            holder.btn_valiate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //TODO update the copy record that its not available and add a copy record to the student id
                     Calendar myCalendar = Calendar.getInstance();
                     holder.btn_valiate.setText("ACCEPT");
                     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -62,6 +57,18 @@ public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.Copy
                     new DatePickerDialog(context, date, myCalendar
                             .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                             myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                }
+            });
+        }else{
+            holder.btn_valiate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO update the copy record that its not available and add a copy record to the student id
+                    Intent intent = new Intent(context, IssueBookActivity.class);
+                    intent.putExtra("copyId",model.getCopyId());
+                    intent.putExtra("bookId",model.getBookId());
+                    context.startActivity(intent);
+
                 }
             });
         }

@@ -19,23 +19,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 public class CopyActivity extends AppCompatActivity {
-    static String bookIdlocal;
+    String bookIdlocal;
     CopyAdapter adapter;
     RecyclerView recyclerView;
     TextView bookid;
     FirebaseFirestore firebaseFirestore;
-    public static Intent start(Context context, String bookId) {
-        Intent intent = new Intent(context, CopyActivity.class);
-        bookIdlocal = bookId;
-        return intent;
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         bookid = (TextView) findViewById(R.id.bookid);
+        bookIdlocal = getIntent().getStringExtra("bookId");
         firebaseFirestore = FirebaseFirestore.getInstance();
         Query query = firebaseFirestore.collection("books").document(bookIdlocal).collection("copy");
         FirestoreRecyclerOptions<Copy> copy = new FirestoreRecyclerOptions.Builder<Copy>().setQuery(query,Copy.class).build();

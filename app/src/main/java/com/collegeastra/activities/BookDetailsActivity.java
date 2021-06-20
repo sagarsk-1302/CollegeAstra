@@ -47,7 +47,8 @@ public class BookDetailsActivity extends AppCompatActivity {
         record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = CopyActivity.start(BookDetailsActivity.this, book.getBookId());
+                Intent intent = new Intent(BookDetailsActivity.this,CopyActivity.class);
+                intent.putExtra("bookId",book.getBookId());
                 startActivity(intent);
             }
         });

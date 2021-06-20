@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.collegeastra.R;
@@ -29,7 +30,7 @@ public class SearchAdapter extends FirestoreRecyclerAdapter<Book,SearchAdapter.S
     @Override
     protected void onBindViewHolder(@NonNull SearchAdapter.SearchViewHolder holder, int position, @NonNull Book model) {
         holder.bookName.setText(model.getTitle());
-        holder.bookName.setOnClickListener(new View.OnClickListener() {
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = BookDetailsActivity.start(context,model);
@@ -47,8 +48,10 @@ public class SearchAdapter extends FirestoreRecyclerAdapter<Book,SearchAdapter.S
 
     public class SearchViewHolder extends RecyclerView.ViewHolder{
         TextView bookName;
+        ConstraintLayout constraintLayout;
         public SearchViewHolder(View itemView){
             super(itemView);
+            constraintLayout = (ConstraintLayout)itemView.findViewById(R.id.const_layout);
             bookName = (TextView) itemView.findViewById(R.id.bookName);
         }
 

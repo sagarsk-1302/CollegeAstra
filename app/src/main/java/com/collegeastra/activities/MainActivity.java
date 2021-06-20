@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
-            //TODO call login activity
         }
 //        setContentView(R.layout.activity_main);
     }

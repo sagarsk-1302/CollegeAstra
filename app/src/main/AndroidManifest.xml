@@ -24,6 +24,7 @@
         <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.BookDetailsActivity" />
         <activity android:name=".activities.CopyActivity" />
+        <activity android:name=".activities.IssueBookActivity" />
     </application>
 
 </manifest>
