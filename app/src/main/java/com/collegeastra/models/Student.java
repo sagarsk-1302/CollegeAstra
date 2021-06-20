@@ -3,23 +3,40 @@ package com.collegeastra.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student implements Parcelable {
     private String USN;
     private String name;
     private String password;
     private String email;
     private String department;
+    private List<String> markedbooks;
 
     public Student(){
 
     }
 
+    public Student(String USN,String name,String password,String email,String department){
+        this.USN = USN;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.department = department;
+    }
     protected Student(Parcel in) {
         USN = in.readString();
         name = in.readString();
         password = in.readString();
         email = in.readString();
         department = in.readString();
+        if (in.readByte() == 0x01) {
+            markedbooks = new ArrayList<String>();
+            in.readList(markedbooks, String.class.getClassLoader());
+        } else {
+            markedbooks = null;
+        }
     }
 
     @Override
@@ -34,6 +51,12 @@ public class Student implements Parcelable {
         dest.writeString(password);
         dest.writeString(email);
         dest.writeString(department);
+        if (markedbooks == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(markedbooks);
+        }
     }
 
     @SuppressWarnings("unused")
@@ -87,5 +110,13 @@ public class Student implements Parcelable {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public List<String> getMarkedbooks() {
+        return markedbooks;
+    }
+
+    public void setMarkedbooks(List<String> markedbooks) {
+        this.markedbooks = markedbooks;
     }
 }

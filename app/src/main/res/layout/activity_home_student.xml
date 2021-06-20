@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/constraintLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,61 +21,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar">
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:singleSelection="true">
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_book"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:checkable="true"
-                android:text="BOOK" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_bookid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="30dp"
-                android:checkable="true"
-                android:text="BookID" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_usn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:checkable="true"
-                android:text="USN" /></com.google.android.material.chip.ChipGroup>
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/search_bar">
 
         <Button
             android:id="@+id/btn_cs"
@@ -90,20 +50,20 @@
 
         <Button
             android:id="@+id/btn_ec"
-            android:text="EC"
-            android:textSize="25sp"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginRight="30dp"
-            app:cornerRadius="18dp"/>
+            android:text="EC"
+            android:textSize="25sp"
+            app:cornerRadius="18dp" />
 
         <Button
             android:id="@+id/btn_is"
-            android:text="IS"
-            android:textSize="25sp"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:cornerRadius="18dp"/>
+            android:text="IS"
+            android:textSize="25sp"
+            app:cornerRadius="18dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -144,33 +104,54 @@
             app:cornerRadius="18dp"/>
     </LinearLayout>
 
-
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Borrowed Books"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-        <Button
-            style="?attr/materialButtonOutlinedStyle"
-            android:id="@+id/btn_addbook"
-            android:text="Add Book"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="50dp"
-            app:cornerRadius="12dp"/>
+    <fragment
+        android:id="@+id/BorrowedBooksFragment"
+        android:name="com.collegeastra.fragments.BorrowedBooksFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout="@layout/fragment_borrowedbooks" />
 
-        <Button
-            android:id="@+id/btn_addstudent"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:text="add student"
-            app:cornerRadius="12dp"
-            />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Marked Books"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BorrowedBooksFragment" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.collegeastra.fragments.MarkedBooksFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:layout="@layout/fragment_markedbooks" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
