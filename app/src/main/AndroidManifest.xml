@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeAstra">
+        <activity android:name=".activities.AddBookActivity"></activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +21,9 @@
         <activity android:name=".activities.AddStudentActivity" />
         <activity android:name=".activities.LibrarianHomeActivity" />
         <activity android:name=".activities.StudentHomeActivity" />
+        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.BookDetailsActivity" />
+        <activity android:name=".activities.CopyActivity" />
     </application>
 
 </manifest>
