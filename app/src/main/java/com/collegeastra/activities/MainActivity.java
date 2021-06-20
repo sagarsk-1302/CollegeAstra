@@ -15,10 +15,11 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(APPNAME,MODE_PRIVATE);
         if(sharedPreferences.getBoolean(ISLOGGEDIN,false)){
             if(sharedPreferences.getBoolean(ISSTUDENT,false)){
-                //TODO Call student homepage activity
+                Intent intent = new Intent(MainActivity.this,StudentHomeActivity.class);
+                startActivity(intent);
+                finish();
             }
             else {
-                //TODO Call librarian homepage activity
                 Intent intent = new Intent(MainActivity.this,LibrarianHomeActivity.class);
                 startActivity(intent);
                 finish();

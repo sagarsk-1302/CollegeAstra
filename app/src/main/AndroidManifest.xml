@@ -19,6 +19,7 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.AddStudentActivity" />
         <activity android:name=".activities.LibrarianHomeActivity" />
+        <activity android:name=".activities.StudentHomeActivity" />
     </application>
 
 </manifest>

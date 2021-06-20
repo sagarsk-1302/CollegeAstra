@@ -14,6 +14,8 @@ public class Student implements Parcelable {
     private String department;
     private List<String> markedbooks;
 
+    public Student(){}
+
     public Student(String USN,String name,String password,String email,String department){
         this.USN = USN;
         this.name = name;

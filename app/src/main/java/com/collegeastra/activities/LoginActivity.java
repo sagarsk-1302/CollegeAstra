@@ -120,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else{
                     if (username.length() != 0 && password.length() != 0) {
+                        Log.d("LoginActivity.java", "onClick: "+username+" "+password);
                         firebaseFirestore.collection("student").document(username).get()
                                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
