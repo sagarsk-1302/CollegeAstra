@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "1080605819375-u0ab6vr3m0rivghj3hp3sfjv85kleig5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.collegeastra",
+            "certificate_hash": "61cc6aa970500375b04128dfd874f2fca9384072"
+          }
+        },
+        {
           "client_id": "1080605819375-r0shplr9bcvhlsq8utnu8t3tnpm4sc60.apps.googleusercontent.com",
           "client_type": 3
         }

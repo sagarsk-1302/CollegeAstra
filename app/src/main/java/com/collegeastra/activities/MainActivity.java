@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 //TODO Call librarian homepage activity
+                Intent intent = new Intent(MainActivity.this,LibrarianHomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         }
         else {
