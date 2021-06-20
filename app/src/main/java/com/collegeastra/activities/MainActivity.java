@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import com.collegeastra.R;
+
 import static com.collegeastra.utils.Constants.*;
 
 public class MainActivity extends AppCompatActivity {
