@@ -39,6 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar">
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/sort_chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:singleSelection="true">

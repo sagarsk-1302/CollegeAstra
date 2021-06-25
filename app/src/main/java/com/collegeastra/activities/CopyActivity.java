@@ -2,6 +2,7 @@ package com.collegeastra.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -18,11 +19,14 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import static com.collegeastra.utils.Constants.APPNAME;
+
 public class CopyActivity extends AppCompatActivity {
     String bookIdlocal;
     CopyAdapter adapter;
     RecyclerView recyclerView;
     TextView bookid;
+    Boolean user;
     FirebaseFirestore firebaseFirestore;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,9 +36,11 @@ public class CopyActivity extends AppCompatActivity {
         bookid = (TextView) findViewById(R.id.bookid);
         bookIdlocal = getIntent().getStringExtra("bookId");
         firebaseFirestore = FirebaseFirestore.getInstance();
+        SharedPreferences sharedPreferences = getSharedPreferences(APPNAME, MODE_PRIVATE);
+        user = sharedPreferences.getBoolean("ISLIBRARIAN",true);
         Query query = firebaseFirestore.collection("books").document(bookIdlocal).collection("copy");
         FirestoreRecyclerOptions<Copy> copy = new FirestoreRecyclerOptions.Builder<Copy>().setQuery(query,Copy.class).build();
-        adapter = new CopyAdapter(this,copy);
+        adapter = new CopyAdapter(this,copy,user,bookIdlocal);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
