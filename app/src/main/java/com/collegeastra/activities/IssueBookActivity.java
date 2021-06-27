@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +42,7 @@ public class IssueBookActivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     DatePicker datePicker;
     TextView copy;
+    Boolean visited = false;
     TextInputEditText et_usn;
     Button issue;
 
@@ -62,8 +64,11 @@ public class IssueBookActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String usn = et_usn.getText().toString().trim();
                 //TODO link usn with student
-                Date date = new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-                Timestamp returnDate = new Timestamp(date);
+                Date date2 = new Date();
+                date2.setYear(datePicker.getYear()-1900);
+                date2.setMonth(datePicker.getMonth());
+                date2.setDate(datePicker.getDayOfMonth());
+                Timestamp returnDate = new Timestamp(date2);
                 Timestamp issueDate = new Timestamp(new Date());
                 Record record = new Record(usn, issueDate, returnDate, copyId);
                 StudentRecord studentRecord = new StudentRecord(copyId, issueDate, returnDate);
@@ -79,33 +84,38 @@ public class IssueBookActivity extends AppCompatActivity {
                                             @Override
                                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                                                 int count = value.size();
-                                                if (count >= 2) {
-                                                    Snackbar.make(issue, "The USN has already borrowed two books", Snackbar.LENGTH_LONG).show();
-                                                } else {
-                                                    DocumentReference documentReference1 = firebaseFirestore.collection("books").document(bookId)
-                                                            .collection("copy").document(copyId);
+                                                if(!visited) {
+                                                    visited = true;
+                                                    if (count >= 2) {
+                                                        Snackbar.make(issue, "The USN has already borrowed two books", Snackbar.LENGTH_LONG).show();
+                                                    } else {
+                                                        DocumentReference documentReference1 = firebaseFirestore.collection("books").document(bookId)
+                                                                .collection("copy").document(copyId);
 
-                                                    documentReference1.collection("records").add(record)
-                                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                                @Override
-                                                                public void onSuccess(DocumentReference documentReference) {
-                                                                    Snackbar.make(issue, "Book has been issued!", Snackbar.LENGTH_LONG).show();
-                                                                    Map<String, Object> data = new HashMap<>();
-                                                                    data.put("available", false);
-                                                                    documentReference1.update(data).addOnFailureListener(new OnFailureListener() {
-                                                                        @Override
-                                                                        public void onFailure(@NonNull Exception e) {
-                                                                            Toast.makeText(IssueBookActivity.this, "Couldn't update the availability", Toast.LENGTH_SHORT).show();
-                                                                        }
-                                                                    });
-                                                                }
-                                                            });
-                                                    documentReference2.collection("records").add(studentRecord).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                        @Override
-                                                        public void onSuccess(DocumentReference documentReference) {
-                                                            Log.d("TAG", "onSuccess: " + "record added to the student");
-                                                        }
-                                                    });
+                                                        documentReference1.collection("records").add(record)
+                                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                    @Override
+                                                                    public void onSuccess(DocumentReference documentReference) {
+                                                                        Snackbar.make(issue, "Book has been issued!", Snackbar.LENGTH_LONG).show();
+                                                                        Map<String, Object> data = new HashMap<>();
+                                                                        data.put("available", false);
+                                                                        data.put("issuedId",documentReference.getId());
+                                                                        documentReference2.collection("records").document(documentReference.getId()).set(studentRecord).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                            @Override
+                                                                            public void onSuccess(Void aVoid) {
+                                                                                Log.d("Success","Record has been updated");
+                                                                            }
+                                                                        });
+                                                                        documentReference1.update(data).addOnFailureListener(new OnFailureListener() {
+                                                                            @Override
+                                                                            public void onFailure(@NonNull Exception e) {
+                                                                                Toast.makeText(IssueBookActivity.this, "Couldn't update the availability", Toast.LENGTH_SHORT).show();
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                });
+
+                                                    }
                                                 }
                                             }
                                         });

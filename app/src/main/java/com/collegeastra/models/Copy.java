@@ -7,15 +7,28 @@ public class Copy implements Parcelable {
     private String bookId;
     private String copyId;
     private Boolean isAvailable = true;
+    private String issuedId;
 
     public Copy(){
 
     }
 
+    public String getIssuedId() {
+        return issuedId;
+    }
+
+    public void setIssuedId(String issuedId) {
+        this.issuedId = issuedId;
+    }
+
+
+
     protected Copy(Parcel in) {
         bookId = in.readString();
+        copyId = in.readString();
         byte isAvailableVal = in.readByte();
         isAvailable = isAvailableVal == 0x02 ? null : isAvailableVal != 0x00;
+        issuedId = in.readString();
     }
 
     @Override
@@ -26,11 +39,13 @@ public class Copy implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(bookId);
+        dest.writeString(copyId);
         if (isAvailable == null) {
             dest.writeByte((byte) (0x02));
         } else {
             dest.writeByte((byte) (isAvailable ? 0x01 : 0x00));
         }
+        dest.writeString(issuedId);
     }
 
     @SuppressWarnings("unused")
@@ -45,7 +60,6 @@ public class Copy implements Parcelable {
             return new Copy[size];
         }
     };
-
     public String getBookId() {
         return bookId;
     }

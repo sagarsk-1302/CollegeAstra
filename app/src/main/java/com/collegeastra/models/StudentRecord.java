@@ -5,12 +5,18 @@ import android.os.Parcelable;
 
 import com.google.firebase.Timestamp;
 
+import java.security.PublicKey;
+
 
 public class StudentRecord implements Parcelable {
     private String copyid;
     private Timestamp borrowedOn;
     private Timestamp returnedOn;
     private Boolean returned = false;
+
+    public StudentRecord(){
+
+    }
 
     public StudentRecord( String copyid, Timestamp borrowedOn, Timestamp returnedOn){
         this.copyid = copyid;

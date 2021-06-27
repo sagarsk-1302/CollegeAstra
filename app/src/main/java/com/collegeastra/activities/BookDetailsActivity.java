@@ -33,19 +33,12 @@ public class BookDetailsActivity extends AppCompatActivity {
         book = model;
         return intent;
     }
-    public Intent start(Book book){
-        Intent intent = new Intent(this,BookDetailsActivity.this));
-        book = book;
-        return intent;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewbook);
         Intent intent = getIntent();
-        String bookame = intent.getStringExtra("searchedBook");
-        boolean checked = intent.getBooleanExtra("chipChecked",true);
         firebaseFirestore = FirebaseFirestore.getInstance();
         bookName = findViewById(R.id.tv_bookname);
         author = findViewById(R.id.tv_author);
@@ -54,11 +47,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         desc = findViewById(R.id.tv_description);
         copiesAvail = findViewById(R.id.tv_noofcopies);
         record = findViewById(R.id.btn_records);
-        if(!checked == true){
         bookName.setText(book.getTitle());
-        }else{
-            bookName.setText(bookame);
-        }
         author.setText(book.getAuthor());
         edition.setText(book.getEdition());
         pubyear.setText(book.getPubYear());
@@ -67,7 +56,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         Log.d("BookDetails",book.getEdition());
 
         SharedPreferences sharedPreferences = getSharedPreferences(APPNAME, MODE_PRIVATE);
-        user = sharedPreferences.getBoolean("ISLIBRARIAN",true);
+        user = sharedPreferences.getBoolean("ISLIBRARIAN",false);
         if(user == true) {
             record.setText("Records");
             record.setVisibility(View.VISIBLE);

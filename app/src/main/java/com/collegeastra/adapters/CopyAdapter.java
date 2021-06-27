@@ -20,19 +20,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.collegeastra.R;
 import com.collegeastra.activities.IssueBookActivity;
+import com.collegeastra.activities.RecordActivity;
 import com.collegeastra.models.Copy;
 import com.collegeastra.models.Record;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.TimeZone;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.collegeastra.utils.Constants.APPNAME;
@@ -78,12 +89,52 @@ public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.Copy
                                         myCalendar.set(Calendar.YEAR, year);
                                         myCalendar.set(Calendar.MONTH, monthOfYear);
                                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                                        Date returnDate = new Date(year, monthOfYear, dayOfMonth);
+                                        Date returnDate = new Date(year-1900, monthOfYear, dayOfMonth);
                                         Timestamp returnedDate = new Timestamp(returnDate);
                                         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-//                                    DocumentReference documentReference = firebaseFirestore.collection("books").document(model.getBookId())
-//                                            .collection("copy").document(model.getCopyId()).collection("records")
-//                                            .orderBy()
+                                        DocumentReference documentReference = firebaseFirestore.collection("books").document(model.getBookId())
+                                                .collection("copy").document(model.getCopyId()).collection("records").document(model.getIssuedId());
+                                        documentReference.update("returnDate",returnedDate).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(context, "Error Occured", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        DocumentReference documentReference1 = firebaseFirestore.collection("books").document(model.getBookId())
+                                                .collection("copy").document(model.getCopyId());
+                                        documentReference1.update("available",true).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(context, "Error Occured", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if(task.isSuccessful()){
+                                                    DocumentSnapshot documentSnapshot = task.getResult();
+                                                    if(documentSnapshot!=null && documentSnapshot.exists()){
+                                                        String usn = documentSnapshot.getString("usn");
+                                                        HashMap<String,Object> map = new HashMap<>();
+                                                        map.put("returnedOn",returnedDate);
+                                                        map.put("returned",true);
+                                                        firebaseFirestore.collection("student").document(usn).collection("records")
+                                                                .document(model.getIssuedId()).update(map).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                holder.btn_valiate.setText("ISSUE");
+                                                                model.setAvailable(true);
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            }
+                                        });
 
                                     }
                                 };
@@ -92,7 +143,15 @@ public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.Copy
                                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                             }
                         }).setNegativeButton("No", null);
+                        alertBuilder.show();
 
+                    }
+                });
+                holder.copyid.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = RecordActivity.recordStart(context,model.getCopyId(),model.getBookId());
+                        context.startActivity(intent);
                     }
                 });
             } else {
@@ -110,20 +169,35 @@ public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.Copy
                 });
             }
         } else {
+            holder.btn_valiate.setVisibility(View.GONE);
             if (model.getAvailable()) {
-                holder.btn_valiate.setText(record.getReturnDate().toString());
-                holder.btn_valiate.setVisibility(View.VISIBLE);
+                holder.tv_return.setText("Available");
+                holder.tv_return.setVisibility(View.VISIBLE);
             } else {
-                 DocumentReference documentReference = firebaseFirestore.collection("books").document(model.getBookId())
-                         .collection("copy").document(model.getCopyId());
-                 record.getReturnDate();
-
-
-
-//
-                holder.btn_valiate.setText(record.getReturnDate().toString());
-                holder.btn_valiate.setVisibility(View.VISIBLE);
-
+                DocumentReference documentReference = firebaseFirestore.collection("books").document(model.getBookId());
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            String issuedDocId = documentSnapshot.getString("issuedId");
+                            documentReference.collection("records").document(issuedDocId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()) {
+                                        DocumentSnapshot documentSnapshot1 = task.getResult();
+                                        Timestamp timestamp = documentSnapshot1.getTimestamp("returnDate");
+                                        Date date = new Date(timestamp.getSeconds());
+                                        SimpleDateFormat formatter = new SimpleDateFormat("d MMMM yyyy");
+                                        String dateString = formatter.format(new Date(timestamp.getSeconds() * 1000L));
+                                        holder.tv_return.setText(dateString);
+                                        holder.tv_return.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
             }
         }
 
@@ -133,18 +207,19 @@ public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.Copy
     @Override
     public CopyAdapter.CopyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.copy_container, parent, false);
-
         return new CopyViewHolder(view);
     }
 
     public class CopyViewHolder extends RecyclerView.ViewHolder {
-        TextView copyid;
+        TextView copyid, tv_return;
         Button btn_valiate;
+
 
         public CopyViewHolder(View itemview) {
             super(itemview);
             copyid = (TextView) itemview.findViewById(R.id.tv_copyid);
             btn_valiate = (Button) itemview.findViewById(R.id.btn_validate);
+            tv_return = (TextView) itemview.findViewById(R.id.tv_date);
         }
     }
 }

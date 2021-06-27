@@ -37,6 +37,7 @@ public class CopyActivity extends AppCompatActivity {
         bookIdlocal = getIntent().getStringExtra("bookId");
         firebaseFirestore = FirebaseFirestore.getInstance();
         SharedPreferences sharedPreferences = getSharedPreferences(APPNAME, MODE_PRIVATE);
+        bookid.setText(bookIdlocal);
         user = sharedPreferences.getBoolean("ISLIBRARIAN",true);
         Query query = firebaseFirestore.collection("books").document(bookIdlocal).collection("copy");
         FirestoreRecyclerOptions<Copy> copy = new FirestoreRecyclerOptions.Builder<Copy>().setQuery(query,Copy.class).build();

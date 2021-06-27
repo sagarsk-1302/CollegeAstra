@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CollegeAstra">
-        <activity android:name=".activities.AddBookActivity"></activity>
+        <activity android:name=".activities.UsnActivity"></activity>
+        <activity android:name=".activities.BookIdActivity" />
+        <activity android:name=".activities.AddBookActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +27,7 @@
         <activity android:name=".activities.BookDetailsActivity" />
         <activity android:name=".activities.CopyActivity" />
         <activity android:name=".activities.IssueBookActivity" />
+        <activity android:name=".activities.RecordActivity" />
     </application>
 
 </manifest>

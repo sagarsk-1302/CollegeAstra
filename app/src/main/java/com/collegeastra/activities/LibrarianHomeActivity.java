@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.collegeastra.R;
 import com.collegeastra.models.Book;
+import com.collegeastra.models.Librarian;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,14 +27,14 @@ import static com.collegeastra.utils.Constants.APPNAME;
 import static com.collegeastra.utils.Constants.ISLOGGEDIN;
 
 public class LibrarianHomeActivity extends AppCompatActivity {
-    Button btn_addstudent;
-    Button btn_addbook;
+
     Book book;
     Context context;
     TextInputLayout searchBook;
     TextInputEditText searchedBook;
     Chip chip;
     ChipGroup chipGroup;
+    Button   btn_addbook,btn_addstudent,btn_cse,btn_ise,btn_ece,btn_civ,btn_me,btn_bs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +44,13 @@ public class LibrarianHomeActivity extends AppCompatActivity {
         btn_addbook = (Button) findViewById(R.id.btn_addbook);
         searchBook = (TextInputLayout) findViewById(R.id.search_bar);
         searchedBook = (TextInputEditText) findViewById(R.id.et_search);
-        chipGroup = (ChipGroup)findViewById(R.id.sort_chip);
+        chipGroup = (ChipGroup) findViewById(R.id.sort_chip);
+        btn_cse = (Button)findViewById(R.id.btn_cs);
+        btn_ise = (Button)findViewById(R.id.btn_is);
+        btn_ece = (Button)findViewById(R.id.btn_ec);
+        btn_civ = (Button)findViewById(R.id.btn_civ);
+        btn_me = (Button)findViewById(R.id.btn_me);
+        btn_bs = (Button)findViewById(R.id.btn_basicsci);
 
         btn_addstudent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,54 +69,91 @@ public class LibrarianHomeActivity extends AppCompatActivity {
         searchBook.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String book = searchedBook.getText().toString().trim();
-                if (book.length() >= 1) {
-                    if(chipGroup.getCheckedChipIds().size() != 0){
-                        for(int i: chipGroup.getCheckedChipIds()){
+                String query = searchedBook.getText().toString().trim();
+                if (query.length() >= 1) {
+                    if (chipGroup.getCheckedChipIds().size() != 0) {
+                        for (int i : chipGroup.getCheckedChipIds()) {
                             chip = (Chip) findViewById(i);
-                            Log.d("LibHome",chip.getText().toString().trim());
+                            Log.d("LibHome", chip.getText().toString().trim());
                         }
-                        if(chip.getText().toString().trim().equals("BOOK")){
-                            Intent intent = BookDetailsActivity.start(context,book);
-                            context.startActivity(intent);
-                            intent.putExtra("searchedBook", book);
-                            intent.putExtra("chipChecked",true);
-                            Log.d("Bookname ", book);
+                        switch (chipGroup.getCheckedChipId()) {
+                            case R.id.chip_book:
+                                Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
+                                intent.putExtra("searchedBook", query);
+                                startActivity(intent);
+                                break;
+                            case R.id.chip_bookid:
+                                Intent intent1 = new Intent(LibrarianHomeActivity.this, BookIdActivity.class);
+                                intent1.putExtra("bookId", query);
+                                startActivity(intent1);
+                                break;
+                            case R.id.chip_usn:
+                                Intent intent2 = new Intent(LibrarianHomeActivity.this, UsnActivity.class);
+                                intent2.putExtra("usn", query);
+                                startActivity(intent2);
+                                break;
+
+
                         }
+
                     }
-//                    Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
-//                    intent.putExtra("searchedBook", book);
-//                    startActivity(intent);
+
                 } else {
                     ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
-                    Snackbar.make(constraintLayout, "Enter Book Name", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(constraintLayout, "Field is Empty", Snackbar.LENGTH_SHORT).show();
                 }
 
             }
         });
+        btn_cse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
+                intent.putExtra("searchedBook", "CSE");
+                startActivity(intent);
+            }
+        });
+        btn_ise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
+                intent.putExtra("searchedBook", "ISE");
+                startActivity(intent);
+            }
+        });
+        btn_ece.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
+                intent.putExtra("searchedBook", "ECE");
+                startActivity(intent);
+            }
+        });
+        btn_me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
+                intent.putExtra("searchedBook", "ME");
+                startActivity(intent);
+            }
+        });
+        btn_civ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
+                intent.putExtra("searchedBook", "CIV");
+                startActivity(intent);
+            }
+        });
+        btn_bs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
+                intent.putExtra("searchedBook", "BS");
+                startActivity(intent);
+            }
+        });
 
-
-//        if (chip_sort.isSelected()) {
-//            searchBook.setEndIconOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    switch (chip_sort.getCheckedChipId()) {
-//                        case R.id.chip_usn:
-//                            break;
-//                        case R.id.chip_book:
-//                            String book = searchedBook.getText().toString().trim();
-//                            Intent intent = new Intent(LibrarianHomeActivity.this, BookDetailsActivity.class);
-//                            intent.putExtra("searchedBook", book);
-//                            startActivity(intent);
-//                            break;
-//                        case R.id.chip_bookid:
-//                            break;
-//                        default:
-////                            Toast.makeText(this, "Select Valid Chip", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//        }
     }
 
     @Override
