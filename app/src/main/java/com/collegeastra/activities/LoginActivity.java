@@ -116,6 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this,"Login Failed for Librarian",Toast.LENGTH_LONG).show();
                             }
                         });
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Please enter the credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
@@ -156,7 +158,10 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this,"Login Failed for Student",Toast.LENGTH_LONG).show();
                             }
                         });
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Please enter the credentials", Toast.LENGTH_SHORT).show();
                     }
+
                 }
             }
         });

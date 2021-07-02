@@ -13,6 +13,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="25dp"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,12 +27,15 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <DatePicker
         android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="24dp"
+        android:headerBackground="#4A4A4A"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
@@ -40,8 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="10dp"
         android:text="Copy ID : "
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/datePicker" />
@@ -53,16 +58,24 @@
         android:layout_marginStart="29dp"
         android:text="CodyId"
         android:textSize="18sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
-    <Button
+    <soup.neumorphism.NeumorphButton
         android:id="@+id/issue_book"
-        android:layout_width="wrap_content"
+        style="@style/Widget.Neumorph.Button"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:text="Issue Book"
+        app:neumorph_shapeType="flat"
+        android:text="Issue"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        app:neumorph_backgroundColor="#292d32"
+        app:neumorph_shadowColorDark="#66000000"
+        app:neumorph_shadowColorLight="#66494949"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_copyid" />

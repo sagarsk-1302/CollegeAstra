@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -31,7 +32,10 @@ import java.util.Date;
 import java.util.List;
 
 import static com.collegeastra.utils.Constants.APPNAME;
+import static com.collegeastra.utils.Constants.EMAIL;
 import static com.collegeastra.utils.Constants.ISLOGGEDIN;
+import static com.collegeastra.utils.Constants.USERNAME;
+import static com.collegeastra.utils.Constants.USN;
 
 public class StudentHomeActivity extends AppCompatActivity {
     TextInputLayout searchBook;
@@ -48,6 +52,8 @@ public class StudentHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_student);
         searchBook = (TextInputLayout) findViewById(R.id.search_bar);
         searchedBook = (TextInputEditText) findViewById(R.id.et_search);
+        getSupportActionBar().setTitle("CollegeAstra");
+        getSupportActionBar().setSubtitle("Student");
         btn_cse = (Button)findViewById(R.id.btn_cs);
         btn_ise = (Button)findViewById(R.id.btn_is);
         btn_ece = (Button)findViewById(R.id.btn_ec);
@@ -173,17 +179,30 @@ public class StudentHomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        SharedPreferences sharedPreferences = getSharedPreferences(APPNAME,MODE_PRIVATE);
         int id = item.getItemId();
         if (id == R.id.logout) {
-            SharedPreferences sharedPreferences = getSharedPreferences(APPNAME,MODE_PRIVATE);
             SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putBoolean(ISLOGGEDIN,false);
+            edit.clear();
             edit.apply();
             Intent intent = new Intent(StudentHomeActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
             return true;
+        }else if(id == R.id.details){
+            String details = "Name : "+sharedPreferences.getString(USERNAME,"")+"\nUSN : "+sharedPreferences.getString(USN,"")+"\nEmail : "+sharedPreferences.getString(EMAIL,"");
+            new AlertDialog.Builder(StudentHomeActivity.this)
+                    .setTitle(sharedPreferences.getString(USERNAME,""))
+                    .setMessage(details)
+                    .setPositiveButton("Close", null)
+                    .show();
+        }else if(id == R.id.aboutus){
+            String details = "Adithya Sunder (1VI18CS002)\nSahana (1VI18CS091)\nSagar S K (1VI18CS090)";
+            new AlertDialog.Builder(StudentHomeActivity.this)
+                    .setTitle("Team Details")
+                    .setMessage(details)
+                    .setPositiveButton("Close", null)
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }

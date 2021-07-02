@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.collegeastra.R;
 import com.collegeastra.models.Book;
@@ -37,10 +38,19 @@ public class BookIdActivity extends AppCompatActivity {
                         finish();
                     }
                     else {
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        getSupportActionBar().setHomeButtonEnabled(true);
                         setContentView(R.layout.no_result);
                     }
                 }
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -6,229 +6,261 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <soup.neumorphism.NeumorphTextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Add book to library"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_bookname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
-        android:text="Book name"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
-
-    <TextView
-        android:id="@+id/tv_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Author"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_bookname"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bookname" />
-
-    <TextView
-        android:id="@+id/tv_edition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Edition"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_author"
-        app:layout_constraintTop_toBottomOf="@+id/tv_author" />
-
-    <TextView
-        android:id="@+id/tv_pubyear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Published year"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_edition"
-        app:layout_constraintTop_toBottomOf="@+id/tv_edition" />
-
-    <TextView
-        android:id="@+id/tv_description"
+        style="@style/Widget.Neumorph.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Description"
-        android:textSize="18sp"
+        android:text="Add book to library"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pubyear" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:neumorph_shadowColorDark="#66000000"
+        app:neumorph_shadowColorLight="#66494949" />
 
-    <EditText
-        android:id="@+id/et_bookname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:ems="10"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_bookname"
-        app:layout_constraintStart_toEndOf="@+id/tv_pubyear"
-        app:layout_constraintTop_toTopOf="@+id/tv_bookname" />
+    <soup.neumorphism.NeumorphCardView
 
-    <EditText
-        android:id="@+id/et_authorname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_author"
-        app:layout_constraintStart_toStartOf="@+id/et_bookname"
-        app:layout_constraintTop_toTopOf="@+id/tv_author" />
-
-    <EditText
-        android:id="@+id/et_edition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_edition"
-        app:layout_constraintStart_toStartOf="@+id/et_authorname"
-        app:layout_constraintTop_toTopOf="@+id/tv_edition" />
-
-    <EditText
-        android:id="@+id/et_pubyear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_pubyear"
-        app:layout_constraintStart_toStartOf="@+id/et_edition"
-        app:layout_constraintTop_toTopOf="@+id/tv_pubyear" />
-
-    <EditText
-        android:id="@+id/et_description"
+        style="@style/Widget.Neumorph.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="25dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
-
-    <TextView
-        android:id="@+id/tv_bookid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="25dp"
-        android:text="Book ID"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_pubyear"
-        app:layout_constraintTop_toBottomOf="@+id/et_description" />
-
-    <TextView
-        android:id="@+id/tv_nocopies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="No. of copies"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_bookid"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bookid" />
-
-    <EditText
-        android:id="@+id/et_bookid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_bookid"
-        app:layout_constraintStart_toStartOf="@+id/et_pubyear"
-        app:layout_constraintTop_toTopOf="@+id/tv_bookid" />
-
-    <EditText
-        android:id="@+id/et_nocopies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_nocopies"
-        app:layout_constraintStart_toStartOf="@+id/et_bookid"
-        app:layout_constraintTop_toTopOf="@+id/tv_nocopies" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/bookchipgroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_dept">
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:neumorph_shadowColorDark="#66000000"
+        app:neumorph_shadowColorLight="#66494949">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_bs"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="BS" />
+            android:paddingBottom="15dp">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_cse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="CSE" />
+            <TextView
+                android:id="@+id/tv_bookname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Book name"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_ece"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="ECE" />
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Author"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_bookname"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bookname" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_ise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="ISE" />
+            <TextView
+                android:id="@+id/tv_edition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Edition"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_author"
+                app:layout_constraintTop_toBottomOf="@+id/tv_author" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="ME" />
+            <TextView
+                android:id="@+id/tv_pubyear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Published year"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_edition"
+                app:layout_constraintTop_toBottomOf="@+id/tv_edition" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_civ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checkable="true"
-            android:text="CIV" />
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Description"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_pubyear" />
 
-    </com.google.android.material.chip.ChipGroup>
+            <EditText
+                android:id="@+id/et_bookname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:ems="10"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_bookname"
+                app:layout_constraintStart_toEndOf="@+id/tv_pubyear"
+                app:layout_constraintTop_toTopOf="@+id/tv_bookname" />
 
-    <TextView
-        android:id="@+id/et_dept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Departments"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_nocopies" />
+            <EditText
+                android:id="@+id/et_authorname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_author"
+                app:layout_constraintStart_toStartOf="@+id/et_bookname"
+                app:layout_constraintTop_toTopOf="@+id/tv_author" />
 
-    <Button
+            <EditText
+                android:id="@+id/et_edition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_edition"
+                app:layout_constraintStart_toStartOf="@+id/et_authorname"
+                app:layout_constraintTop_toTopOf="@+id/tv_edition" />
+
+            <EditText
+                android:id="@+id/et_pubyear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_pubyear"
+                app:layout_constraintStart_toStartOf="@+id/et_edition"
+                app:layout_constraintTop_toTopOf="@+id/tv_pubyear" />
+
+            <EditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="25dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+            <TextView
+                android:id="@+id/tv_bookid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Book ID"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_pubyear"
+                app:layout_constraintTop_toBottomOf="@+id/et_description" />
+
+            <TextView
+                android:id="@+id/tv_nocopies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="No. of copies"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_bookid"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bookid" />
+
+            <EditText
+                android:id="@+id/et_bookid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_bookid"
+                app:layout_constraintStart_toStartOf="@+id/et_pubyear"
+                app:layout_constraintTop_toTopOf="@+id/tv_bookid" />
+
+            <EditText
+                android:id="@+id/et_nocopies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_nocopies"
+                app:layout_constraintStart_toStartOf="@+id/et_bookid"
+                app:layout_constraintTop_toTopOf="@+id/tv_nocopies" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/bookchipgroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_dept">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_bs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="BS" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_cse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="CSE" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_ece"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="ECE" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_ise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="ISE" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="ME" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_civ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="CIV" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/et_dept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Departments"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_nocopies" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+
+    <soup.neumorphism.NeumorphButton
+        style="@style/Widget.Neumorph.Button"
+        app:neumorph_shadowColorDark="#66000000"
+        app:neumorph_shadowColorLight="#66494949"
         android:id="@+id/addbook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:text="Add book"
+        android:fontFamily="@font/timeless"
+        android:padding="20dp"
+        android:textColor="#BCBCBC"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

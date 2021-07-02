@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
         <item
+            android:id="@+id/details"
+            android:title="My Details" />
+        <item
+            android:id="@+id/aboutus"
+            android:title="About us" />
+        <item
             android:id="@+id/logout"
             android:title="Logout" />
-
 </menu>

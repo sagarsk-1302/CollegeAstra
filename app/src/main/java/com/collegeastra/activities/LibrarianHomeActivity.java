@@ -1,6 +1,7 @@
 package com.collegeastra.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +30,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import static com.collegeastra.utils.Constants.APPNAME;
+import static com.collegeastra.utils.Constants.EMAIL;
 import static com.collegeastra.utils.Constants.ISLOGGEDIN;
+import static com.collegeastra.utils.Constants.USERNAME;
 
 public class LibrarianHomeActivity extends AppCompatActivity {
 
@@ -34,23 +42,26 @@ public class LibrarianHomeActivity extends AppCompatActivity {
     TextInputEditText searchedBook;
     Chip chip;
     ChipGroup chipGroup;
-    Button   btn_addbook,btn_addstudent,btn_cse,btn_ise,btn_ece,btn_civ,btn_me,btn_bs;
+    Button btn_addbook, btn_addstudent, btn_cse, btn_ise, btn_ece, btn_civ, btn_me, btn_bs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lib_home);
+        getSupportActionBar().setTitle("CollegeAstra");
+        getSupportActionBar().setSubtitle("Librarian");
         btn_addstudent = (Button) findViewById(R.id.btn_addstudent);
         btn_addbook = (Button) findViewById(R.id.btn_addbook);
         searchBook = (TextInputLayout) findViewById(R.id.search_bar);
         searchedBook = (TextInputEditText) findViewById(R.id.et_search);
         chipGroup = (ChipGroup) findViewById(R.id.sort_chip);
-        btn_cse = (Button)findViewById(R.id.btn_cs);
-        btn_ise = (Button)findViewById(R.id.btn_is);
-        btn_ece = (Button)findViewById(R.id.btn_ec);
-        btn_civ = (Button)findViewById(R.id.btn_civ);
-        btn_me = (Button)findViewById(R.id.btn_me);
-        btn_bs = (Button)findViewById(R.id.btn_basicsci);
+        btn_cse = (Button) findViewById(R.id.btn_cs);
+        btn_ise = (Button) findViewById(R.id.btn_is);
+        btn_ece = (Button) findViewById(R.id.btn_ec);
+        btn_civ = (Button) findViewById(R.id.btn_civ);
+        btn_me = (Button) findViewById(R.id.btn_me);
+        btn_bs = (Button) findViewById(R.id.btn_basicsci);
+        ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
 
         btn_addstudent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,10 +83,6 @@ public class LibrarianHomeActivity extends AppCompatActivity {
                 String query = searchedBook.getText().toString().trim();
                 if (query.length() >= 1) {
                     if (chipGroup.getCheckedChipIds().size() != 0) {
-                        for (int i : chipGroup.getCheckedChipIds()) {
-                            chip = (Chip) findViewById(i);
-                            Log.d("LibHome", chip.getText().toString().trim());
-                        }
                         switch (chipGroup.getCheckedChipId()) {
                             case R.id.chip_book:
                                 Intent intent = new Intent(LibrarianHomeActivity.this, SearchActivity.class);
@@ -92,14 +99,13 @@ public class LibrarianHomeActivity extends AppCompatActivity {
                                 intent2.putExtra("usn", query);
                                 startActivity(intent2);
                                 break;
-
-
                         }
 
+                    } else {
+                        Snackbar.make(constraintLayout, "Please select a chip", Snackbar.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
                     Snackbar.make(constraintLayout, "Field is Empty", Snackbar.LENGTH_SHORT).show();
                 }
 
@@ -154,6 +160,7 @@ public class LibrarianHomeActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     @Override
@@ -164,17 +171,30 @@ public class LibrarianHomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        SharedPreferences sharedPreferences = getSharedPreferences(APPNAME, MODE_PRIVATE);
         int id = item.getItemId();
         if (id == R.id.logout) {
-            SharedPreferences sharedPreferences = getSharedPreferences(APPNAME, MODE_PRIVATE);
             SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putBoolean(ISLOGGEDIN, false);
+            edit.clear();
             edit.apply();
             Intent intent = new Intent(LibrarianHomeActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             return true;
+        }else if(id == R.id.details){
+            String details = "Name : "+sharedPreferences.getString(USERNAME,"")+"\nEmail : "+sharedPreferences.getString(EMAIL,"");
+            new AlertDialog.Builder(LibrarianHomeActivity.this)
+                    .setTitle(sharedPreferences.getString(USERNAME,""))
+                    .setMessage(details)
+                    .setPositiveButton("Close", null)
+                    .show();
+        }else if(id == R.id.aboutus){
+            String details = "Adithya Sunder (1VI18CS002)\nSahana (1VI18CS091)\nSagar S K (1VI18CS090)";
+            new AlertDialog.Builder(LibrarianHomeActivity.this)
+                    .setTitle("Team Details")
+                    .setMessage(details)
+                    .setPositiveButton("Close", null)
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }

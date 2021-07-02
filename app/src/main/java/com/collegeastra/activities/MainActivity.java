@@ -1,6 +1,7 @@
 package com.collegeastra.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences = getSharedPreferences(APPNAME,MODE_PRIVATE);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         if(sharedPreferences.getBoolean(ISLOGGEDIN,false)){
             if(sharedPreferences.getBoolean(ISSTUDENT,false)){
                 Intent intent = new Intent(MainActivity.this,StudentHomeActivity.class);

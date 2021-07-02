@@ -7,129 +7,200 @@
     android:layout_height="match_parent">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_bar"
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorphCardView"
+        style="@style/Widget.Neumorph.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        app:endIconDrawable="@android:drawable/ic_menu_search"
-        app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:neumorph_shadowColorDark="#66000000"
+        app:neumorph_shadowColorLight="#66494949">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_search"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:hint="Search" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="0dp"
+                app:endIconDrawable="@android:drawable/ic_menu_search"
+                app:endIconMode="custom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:hint="Search"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </soup.neumorphism.NeumorphCardView>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar">
-
-        <Button
-            android:id="@+id/btn_cs"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginRight="30dp"
-            android:text="CS"
-            android:textSize="25sp"
-            app:cornerRadius="18dp"
-            app:strokeWidth="0dp" />
-
-        <Button
-            android:id="@+id/btn_ec"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginRight="30dp"
-            android:text="EC"
-            android:textSize="25sp"
-            app:cornerRadius="18dp" />
-
-        <Button
-            android:id="@+id/btn_is"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="IS"
-            android:textSize="25sp"
-            app:cornerRadius="18dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25sp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <Button
-            android:id="@+id/btn_me"
-            android:text="ME"
-            android:textSize="25sp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginRight="30dp"
-            app:cornerRadius="18dp"/>
-
-        <Button
-            android:id="@+id/btn_civ"
-            android:text="CIV"
-            android:textSize="25sp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginRight="30dp"
-            app:cornerRadius="18dp"/>
-
-        <Button
-            android:id="@+id/btn_basicsci"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:text="Basic Science"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            app:cornerRadius="18dp"/>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Borrowed Books"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-    <androidx.cardview.widget.CardView
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorphCardView2"
+        style="@style/Widget.Neumorph.CardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/neumorphCardView"
+        app:neumorph_shadowColorDark="#66000000"
+        app:neumorph_shadowColorLight="#66494949">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="6dp"
+                tools:layout_editor_absoluteY="278dp">
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btn_cs"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/timeless"
+                    android:text="CS"
+                    android:textColor="#BCBCBC"
+                    android:textSize="26sp"
+                    app:cornerRadius="18dp"
+                    app:neumorph_shadowColorDark="#66000000"
+                    app:neumorph_shadowColorLight="#66494949"
+                    app:strokeWidth="0dp" />
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btn_ec"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/timeless"
+                    android:text="EC"
+                    android:textColor="#BCBCBC"
+                    android:textSize="26sp"
+                    app:cornerRadius="18dp"
+                    app:neumorph_shadowColorDark="#66000000"
+                    app:neumorph_shadowColorLight="#66494949" />
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btn_is"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:fontFamily="@font/timeless"
+                    android:text="IS"
+                    android:textColor="#BCBCBC"
+                    android:textSize="26sp"
+                    app:cornerRadius="18dp"
+                    app:neumorph_shadowColorDark="#66000000"
+                    app:neumorph_shadowColorLight="#66494949" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="418dp">
+
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btn_me"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/timeless"
+                    android:text="ME"
+                    android:textColor="#BCBCBC"
+                    android:textSize="26sp"
+                    app:neumorph_shadowColorDark="#66000000"
+                    app:neumorph_shadowColorLight="#66494949" />
+
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btn_civ"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/timeless"
+                    android:text="CIV"
+                    android:textColor="#BCBCBC"
+                    android:textSize="26sp"
+                    app:cornerRadius="18dp"
+                    app:neumorph_shadowColorDark="#66000000"
+                    app:neumorph_shadowColorLight="#66494949" />
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btn_basicsci"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:fontFamily="@font/timeless"
+                    android:text="BS"
+                    android:textAllCaps="false"
+                    android:textColor="#BCBCBC"
+                    android:textSize="26sp"
+                    app:cornerRadius="18dp"
+                    app:neumorph_shadowColorDark="#66000000"
+                    app:neumorph_shadowColorLight="#66494949" />
+            </LinearLayout>
+        </LinearLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Borrowed Books"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neumorphCardView2" />
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorphCardView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:cardBackgroundColor="#292d32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:neumorph_shadowColorDark="#66000000"
+        app:neumorph_shadowColorLight="#66494949">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="7dp">
 
             <LinearLayout
                 android:id="@+id/firstrow"
@@ -148,6 +219,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:text="You borrowed the book :"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
@@ -155,6 +227,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Data structures and algorithm"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -168,6 +241,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="15dp"
                         android:text="The return date is"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
@@ -175,6 +249,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="20/12/2020"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -184,6 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:textColor="@color/white"
                 android:visibility="visible">
 
                 <LinearLayout
@@ -196,6 +272,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:text="You borrowed the book :"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
@@ -203,6 +280,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Data structures and algorithm"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </LinearLayout>
 
@@ -216,6 +294,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="15dp"
                         android:text="The return date is"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
@@ -223,9 +302,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="20/12/2020"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </soup.neumorphism.NeumorphCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

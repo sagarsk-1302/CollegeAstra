@@ -51,9 +51,7 @@ import static com.collegeastra.utils.Constants.APPNAME;
 public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.CopyViewHolder> {
     Boolean user;
     Context context;
-    Record record;
     String bookid;
-    Boolean avail;
     FirebaseFirestore firebaseFirestore;
 
     public CopyAdapter(Context context, FirestoreRecyclerOptions<Copy> query, Boolean user, String bookid) {
@@ -165,6 +163,13 @@ public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.Copy
                         intent.putExtra("bookId", model.getBookId());
                         context.startActivity(intent);
 
+                    }
+                });
+                holder.copyid.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = RecordActivity.recordStart(context,model.getCopyId(),model.getBookId());
+                        context.startActivity(intent);
                     }
                 });
             }

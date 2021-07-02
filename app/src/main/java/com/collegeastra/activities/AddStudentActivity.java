@@ -1,6 +1,7 @@
 package com.collegeastra.activities;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,8 @@ public class AddStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         firebaseFirestore = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_addstudent);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         btn_submit = (Button) findViewById(R.id.btn_addstud);
         department = (ChipGroup) findViewById(R.id.chipGroup2);
         et_name = (EditText) findViewById(R.id.et_name);
@@ -109,5 +112,12 @@ public class AddStudentActivity extends AppCompatActivity {
             }
 
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
