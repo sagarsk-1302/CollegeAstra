@@ -179,27 +179,29 @@ public class CopyAdapter extends FirestoreRecyclerAdapter<Copy, CopyAdapter.Copy
                 holder.tv_return.setText("Available");
                 holder.tv_return.setVisibility(View.VISIBLE);
             } else {
-                DocumentReference documentReference = firebaseFirestore.collection("books").document(model.getBookId());
+                DocumentReference documentReference = firebaseFirestore.collection("books").document(model.getBookId()).collection("copy").document(model.getCopyId());
                 documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()){
+                        if(task.isSuccessful()) {
                             DocumentSnapshot documentSnapshot = task.getResult();
-                            String issuedDocId = documentSnapshot.getString("issuedId");
-                            documentReference.collection("records").document(issuedDocId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if(task.isSuccessful()) {
-                                        DocumentSnapshot documentSnapshot1 = task.getResult();
-                                        Timestamp timestamp = documentSnapshot1.getTimestamp("returnDate");
-                                        Date date = new Date(timestamp.getSeconds());
-                                        SimpleDateFormat formatter = new SimpleDateFormat("d MMMM yyyy");
-                                        String dateString = formatter.format(new Date(timestamp.getSeconds() * 1000L));
-                                        holder.tv_return.setText(dateString);
-                                        holder.tv_return.setVisibility(View.VISIBLE);
+                            if (documentSnapshot != null && documentSnapshot.exists()) {
+                                String issuedDocId = documentSnapshot.getString("issuedId");
+                                documentReference.collection("records").document(issuedDocId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot documentSnapshot1 = task.getResult();
+                                            Timestamp timestamp = documentSnapshot1.getTimestamp("returnDate");
+                                            Date date = new Date(timestamp.getSeconds());
+                                            SimpleDateFormat formatter = new SimpleDateFormat("d MMMM yyyy");
+                                            String dateString = formatter.format(new Date(timestamp.getSeconds() * 1000L));
+                                            holder.tv_return.setText(dateString);
+                                            holder.tv_return.setVisibility(View.VISIBLE);
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
                     }
                 });

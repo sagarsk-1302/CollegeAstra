@@ -40,7 +40,7 @@ public class LibrarianHomeActivity extends AppCompatActivity {
     Context context;
     TextInputLayout searchBook;
     TextInputEditText searchedBook;
-    Chip chip;
+    Chip chip;c
     ChipGroup chipGroup;
     Button btn_addbook, btn_addstudent, btn_cse, btn_ise, btn_ece, btn_civ, btn_me, btn_bs;
 
